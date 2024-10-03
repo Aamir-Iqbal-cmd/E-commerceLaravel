@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2024 at 01:03 PM
+-- Generation Time: Oct 03, 2024 at 03:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,9 +65,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `category_name`, `category_image`, `category_desc`, `created_at`, `updated_at`) VALUES
-(1, 'Watch', '1727872829.jfif', 'lkasd fsladfs', '2024-10-02 19:40:29', '2024-10-02 19:40:29'),
-(2, 'Shoes', '1727872842.jfif', 'kskjdf asd', '2024-10-02 19:40:42', '2024-10-02 19:40:42'),
-(3, 'Shoes', '1727940501.jfif', 'klsmfd sfs', '2024-10-03 14:28:21', '2024-10-03 14:28:21');
+(1, 'Watch', '1727959345.jfif', 'watches', '2024-10-03 19:42:25', '2024-10-03 19:42:25'),
+(2, 'Shoes', '1727959382.jpg', 'showasdnf', '2024-10-03 19:43:02', '2024-10-03 19:43:02'),
+(3, 'Glasses', '1727959412.jpg', 'jas f fdlas f', '2024-10-03 19:43:32', '2024-10-03 19:43:32');
 
 -- --------------------------------------------------------
 
@@ -92,14 +92,9 @@ CREATE TABLE `checkouts` (
 --
 
 INSERT INTO `checkouts` (`id`, `name`, `email`, `phone`, `address`, `amount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Aamir iqbal', 'amirraoiqbal@gmail.com', '03034907672', 'bhalwal, sargodha', 1000, 'paid', '2024-10-02 20:29:33', '2024-10-02 20:29:33'),
-(2, 'Ali Raza', 'assad@gmail.com', '33445566', 'lahore', 500, 'paid', '2024-10-02 21:14:01', '2024-10-02 21:14:01'),
-(3, 'Ali Raza', 'assad@gmail.com', '33445566', 'lahore', 500, 'paid', '2024-10-02 21:19:45', '2024-10-02 21:19:45'),
-(4, 'Ali Raza', 'assad@gmail.com', '33445566', 'lahore', 500, 'paid', '2024-10-02 22:15:34', '2024-10-02 22:15:34'),
-(5, 'Ali Raza', 'assad@gmail.com', '33445566', 'lahore', 500, 'paid', '2024-10-02 22:32:40', '2024-10-02 22:32:40'),
-(6, 'Ali Raza', 'assad@gmail.com', '33445566', 'lahore', 500, 'paid', '2024-10-02 22:36:16', '2024-10-02 22:36:16'),
-(7, 'amir', 'admin@gmail.com', '33445566', 'klklljjlkjlkjlkj', 500, 'paid', '2024-10-02 22:38:54', '2024-10-02 22:38:54'),
-(8, 'amir', 'admin@gmail.com', '33445566', 'klklljjlkjlkjlkj', 500, 'paid', '2024-10-02 22:41:40', '2024-10-02 22:41:40');
+(1, 'Aamir iqbal', 'amirraoiqbal@gmail.com', '03034907672', 'ajsdf asfjas f', 100, 'paid', '2024-10-03 19:48:05', '2024-10-03 19:48:05'),
+(2, 'Aamir iqbal', 'amirraoiqbal@gmail.com', '03034907672', 'ajsdf asfjas f', 100, 'paid', '2024-10-03 19:49:13', '2024-10-03 19:49:13'),
+(3, 'Aamir iqbal', 'amirraoiqbal@gmail.com', '03034907672', 'ajsdf asfjas f', 100, 'paid', '2024-10-03 19:51:37', '2024-10-03 19:51:37');
 
 -- --------------------------------------------------------
 
@@ -169,16 +164,15 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2024_09_27_073143_create_personal_access_tokens_table', 1),
-(5, '2024_09_29_095229_create_categories_table', 1),
-(6, '2024_09_29_135349_create_subcategories_table', 1),
-(7, '2024_09_29_171346_create_products_table', 1),
-(8, '2024_10_01_153353_create_orders_table', 1),
-(9, '2024_10_01_160148_create_checkouts_table', 1),
-(10, '2024_10_02_135941_add_product_id_to_orders_table', 2);
+(20, '0001_01_01_000000_create_users_table', 1),
+(21, '0001_01_01_000001_create_cache_table', 1),
+(22, '0001_01_01_000002_create_jobs_table', 1),
+(23, '2024_09_27_073143_create_personal_access_tokens_table', 1),
+(24, '2024_09_29_095229_create_categories_table', 1),
+(25, '2024_09_29_135349_create_subcategories_table', 1),
+(26, '2024_09_29_171346_create_products_table', 1),
+(27, '2024_10_01_153353_create_orders_table', 1),
+(28, '2024_10_01_160148_create_checkouts_table', 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +183,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `order_id` int(11) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
   `payment_method` varchar(255) NOT NULL,
   `payment_status` varchar(255) NOT NULL,
   `transaction_id` varchar(255) NOT NULL,
@@ -203,8 +197,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_id`, `product_id`, `payment_method`, `payment_status`, `transaction_id`, `total_amount`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 'stripe', 'completed', 'ch_3Q5ScRAvrdybUPpy1JqVXimW', 1000, '2024-10-02 20:29:33', '2024-10-02 20:29:33'),
-(2, 6, NULL, 'stripe', 'completed', 'ch_3Q5Ub4AvrdybUPpy14gmqgat', 500, '2024-10-02 22:36:16', '2024-10-02 22:36:16');
+(1, 3, 1, 'stripe', 'completed', 'ch_3Q5oVIAvrdybUPpy0impg6ts', 100, '2024-10-03 19:51:37', '2024-10-03 19:51:37');
 
 -- --------------------------------------------------------
 
@@ -261,10 +254,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_name`, `product_price`, `cat_id`, `subcat_id`, `quantity`, `product_desc`, `pro_image`, `created_at`, `updated_at`) VALUES
-(1, 'Rolex 34', 1000, 1, 2, 1, 'jndsfs fklsdf', '1727872904.jfif', '2024-10-02 19:41:44', '2024-10-02 19:41:44'),
-(2, 'Rolex hiroo', 2000, 1, 2, 1, 'ksdfldsfd', '1727872940.jfif', '2024-10-02 19:42:20', '2024-10-02 19:42:20'),
-(3, 'Adidas 34', 500, 2, 1, 2, 'lksfd', '1727872974.jpg', '2024-10-02 19:42:54', '2024-10-02 19:42:54'),
-(4, 'Adidas lather', 700, 2, 1, 3, 'kladsnfsd', '1727873004.jfif', '2024-10-02 19:43:24', '2024-10-02 19:43:24');
+(1, 'Rolex 34', 100, 1, 1, 1, 'jasdf asdfjas f', '1727959598.jfif', '2024-10-03 19:45:04', '2024-10-03 19:46:38'),
+(2, 'Adidas 34', 200, 2, 2, 1, 'jsdfsf', '1727959534.jpg', '2024-10-03 19:45:34', '2024-10-03 19:45:34'),
+(3, 'raybone 345', 1090, 3, 3, 2, 'fjksdkf  s', '1727959567.jfif', '2024-10-03 19:46:07', '2024-10-03 19:46:07');
 
 -- --------------------------------------------------------
 
@@ -286,8 +278,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('7ZCHvLiToTOcsFLanCoOG7o7tcHSEFdVe0YMnuJV', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT28wYUdCTTc1OVNWUnJJbEFENTBBMUN3WHBxV3Nnb2hLMWZxd0Z5NSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jYXRlZ29yaWVzX2xpc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1727941253),
-('mjyCYGdNKJb76pfZ0JOE6NA6V6LXzwbrRKRLRvp3', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoib1pUUDlXdmk2WGd1VDNvcURCekU1QzZ2MHhkUFlDRll1Y0tLdkdQeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zdHJpcGUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjQ6ImNhcnQiO2E6MTp7aTozO2E6NTp7czoyOiJpZCI7czoxOiIzIjtzOjU6InRpdGxlIjtzOjk6IkFkaWRhcyAzNCI7czo1OiJwcmljZSI7czozOiI1MDAiO3M6NToiaW1hZ2UiO3M6MTQ6IjE3Mjc4NzI5NzQuanBnIjtzOjg6InF1YW50aXR5IjtpOjE7fX1zOjEzOiJjaGVja291dF9kYXRhIjthOjQ6e3M6NDoibmFtZSI7czo0OiJhbWlyIjtzOjU6ImVtYWlsIjtzOjE1OiJhZG1pbkBnbWFpbC5jb20iO3M6NToicGhvbmUiO3M6ODoiMzM0NDU1NjYiO3M6NzoiYWRkcmVzcyI7czoxNjoia2xrbGxqamxramxramxraiI7fX0=', 1727883701);
+('9N1xot2sbOHtA9G28Quy06E5ZIL6jidLYBkdUv0j', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUnZoYzFQRG5uMXhMbU8zMk5ZSHR1ZVhFYXB4VnJQZWV4UmQ4MnNuSSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0c19saXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1727960305);
 
 -- --------------------------------------------------------
 
@@ -309,8 +300,9 @@ CREATE TABLE `subcategories` (
 --
 
 INSERT INTO `subcategories` (`id`, `subcategory_name`, `category_id`, `subcategory_desc`, `created_at`, `updated_at`) VALUES
-(1, 'Adidas', 2, 'ksndfsldf ds', '2024-10-02 19:40:59', '2024-10-02 19:40:59'),
-(2, 'Rolex', 1, 'lksldfl sldf sd', '2024-10-02 19:41:08', '2024-10-02 19:41:08');
+(1, 'Rolex', 1, 'ajsdf sa ddf', '2024-10-03 19:44:00', '2024-10-03 19:44:00'),
+(2, 'Adidas', 2, 'ajsdf sf', '2024-10-03 19:44:13', '2024-10-03 19:44:13'),
+(3, 'raybon', 3, 'kjasdf sf', '2024-10-03 19:44:32', '2024-10-03 19:44:32');
 
 -- --------------------------------------------------------
 
@@ -444,7 +436,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `checkouts`
 --
 ALTER TABLE `checkouts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -462,13 +454,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -480,13 +472,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
