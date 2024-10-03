@@ -63,6 +63,24 @@
           </li>
         </ul>
       </li><!-- End Tables Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#order-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Management Orders
+          </span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="order-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ url('/clients_list') }}">
+              <i class="bi bi-circle"></i><span>Clients</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url('/orders_list') }}">
+              <i class="bi bi-circle"></i><span>Order List</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Tables Nav -->
     </ul>
 
   </aside>

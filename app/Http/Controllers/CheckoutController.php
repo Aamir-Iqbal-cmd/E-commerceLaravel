@@ -31,7 +31,6 @@ class CheckoutController extends Controller
         return view('stripe');
     }
 
-
     public function charge(Request $request)
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -41,7 +40,7 @@ class CheckoutController extends Controller
 
         $totalAmount = 0;
 
-        // Calculate the total amount
+        
         foreach ($cart as $productId => $item) {
             if (isset($item['price']) && isset($item['quantity'])) {
                 $totalAmount += $item['price'] * $item['quantity'];
@@ -55,7 +54,7 @@ class CheckoutController extends Controller
         }
 
         try {
-            // Create Stripe charge
+
             $charge = Charge::create([
                 'amount' => $totalAmountInCents,
                 'currency' => 'usd',
@@ -63,7 +62,7 @@ class CheckoutController extends Controller
                 'source' => $request->stripeToken,
             ]);
 
-            // Save checkout details in the database
+
             $order = Checkout::create([
                 'name' => $checkoutData['name'],
                 'email' => $checkoutData['email'],
@@ -73,20 +72,20 @@ class CheckoutController extends Controller
                 'status' => 'paid',
             ]);
 
-            // Loop through the cart and create an order entry for each product
+
             foreach ($cart as $productId => $item) {
-                ///dd($productId);
+                //dd($productId, $item);
                 \App\Models\Order::create([
-                    'ordr_id' => $order->id,
-                    'product_id' => $productId,  // Use the key (product ID) from the cart array
+                    'order_id' => $order->id,
+                    'product_id' => (int) $productId,
                     'payment_method' => 'stripe',
                     'payment_status' => 'completed',
                     'transaction_id' => $charge->id,
-                    'total_amount' => $item['price'] * $item['quantity'],  // Set the amount for this specific product
+                    'total_amount' => $item['price'] * $item['quantity'],
                 ]);
             }
 
-            // Clear session data after successful payment
+
             Session::forget('checkout_data');
             Session::forget('cart');
 
@@ -96,53 +95,6 @@ class CheckoutController extends Controller
         }
     }
 
-
-
-
-
-    // Handle Stripe Payment and Store in Database
-    // public function charge(Request $request)
-    // {
-    //     Stripe::setApiKey(env('STRIPE_SECRET'));
-
-    //     $checkoutData = Session::get('checkout_data');
-
-    //     try {
-    //         // Create Stripe charge
-    //         $charge = Charge::create([
-    //             'amount' => 1000, // Example amount (in cents)
-    //             'currency' => 'usd',
-    //             'description' => 'Order Payment',
-    //             'source' => $request->stripeToken,
-    //         ]);
-
-    //         // Save the order and checkout details in the database
-    //         $order = \App\Models\Checkout::create([
-    //             'name' => $checkoutData['name'],
-    //             'email' => $checkoutData['email'],
-    //             'phone' => $checkoutData['phone'],
-    //             'address' => $checkoutData['address'],
-    //             'amount' => 1000, // Example amount
-    //             'status' => 'paid',
-    //         ]);
-
-    //         \App\Models\Order::create([
-    //             'order_id' => $order->id,
-    //             'payment_method' => 'stripe',
-    //             'payment_status' => 'completed',
-    //             'transaction_id' => $charge->id,
-    //             'total_amount' => 1000, // Example amount
-    //         ]);
-
-    //         // Clear session data
-    //         Session::forget('checkout_data');
-
-    //         return redirect()->route('checkout.success')->with('success', 'Payment successful!');
-    //     } catch (\Exception $e) {
-    //         return back()->with('error', $e->getMessage());
-    //     }
-
-    // }
 
     public function success()
     {

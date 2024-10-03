@@ -56,22 +56,24 @@ class CategoryController extends Controller
 
         return view('admin.edit_category', ['category'=>$category]);
     }
-    public function edit($id, Request $request){
+    public function edit($id, Request $request) {
         $category = Category::findOrFail($id);
 
         $rules = [
             'category_name' => 'required',
-            'cat_image' => 'required'
+            'cat_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
 
-        $validator = Validator::make($request->all(),$rules);
+        $validator = Validator::make($request->all(), $rules);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->route('update.category', $category->id)->withInput()->withErrors($validator);
         }
 
+
         $category->category_name = $request->category_name;
         $category->category_desc = $request->category_desc;
+
 
         if ($request->hasFile('cat_image')) {
             $image = $request->file('cat_image');
@@ -79,15 +81,15 @@ class CategoryController extends Controller
             $image_name = time() . "." . $ext;
             $image->move(public_path('admin/uploads/category'), $image_name);
 
+
             $category->category_image = $image_name;
-            $category->save();
-        } 
+        }
 
         $category->save();
+
         return redirect()->route('update.category', $category->id)->with('success', 'Category Updated Successfully');
-
-
     }
+
     public function destroy($id)
 {
     $category = Category::find($id);

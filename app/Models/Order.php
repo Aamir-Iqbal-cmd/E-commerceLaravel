@@ -9,12 +9,14 @@ class Order extends Model
 {
     use HasFactory;
 
-    // Define fillable properties
+   
     protected $fillable = [
         'order_id',
+        'product_id',
         'payment_method',
         'payment_status',
         'transaction_id',
         'total_amount',
     ];
 }
+

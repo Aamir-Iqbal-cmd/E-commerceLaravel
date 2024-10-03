@@ -20,7 +20,7 @@ class CartController extends Controller
         $product = [
             'id' => $request->input('product_id'),
             'title' => $request->input('product_title'),
-            'price' => $request->input('product_price'), 
+            'price' => $request->input('product_price'),
             'image' => $request->input('product_image'),
             'quantity' => 1,
         ];
@@ -28,14 +28,13 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         if (isset($cart[$product['id']])) {
-            // Increment quantity if product is already in the cart
             $cart[$product['id']]['quantity']++;
         } else {
 
             $cart[$product['id']] = $product;
         }
 
-        // Store the updated cart in the session
+
         session()->put('cart', $cart);
 
         return redirect()->route('cart.view')->with('success', 'Product added to cart successfully!');

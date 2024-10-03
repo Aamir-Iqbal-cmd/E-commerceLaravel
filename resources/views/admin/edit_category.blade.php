@@ -28,7 +28,7 @@
                                 </div>
                             @endif
                             <h5 class="card-title">Update Category</h5>
-                            <form method="POST" action="{{route('edit.category', $category->id)}}" class="row g-3">
+                            <form method="POST" action="{{route('edit.category', $category->id)}}" class="row g-3" enctype="multipart/form-data">
                                 @method('put')
                                 @csrf
                                 <div class="col-md-12">
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="file" name="cat_image" 
+                                        <input type="file" name="cat_image"
                                             class="@error('cat_image') is-invalid @enderror form-control"
                                             id="floatingImage">
                                         @error('cat_image')
